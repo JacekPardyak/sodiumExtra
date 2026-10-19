@@ -1,3 +1,43 @@
+devtools::create("sodiumExtra")
+usethis::use_mit_license()
+
+devtools::document()
+devtools::test()
+
+# Sprawdzenie kodu pakietu
+devtools::check()
+
+# Zbudowanie archiwum pakietu
+devtools::build()
+
+# Instalacja lokalna
+devtools::install()
+
+# Załadowanie biblioteki
+library(sodiumExtra)
+
+create_user_keys("vito")
+create_user_keys("bob")
+
+encrypt_message(
+  message = "Ala ma kota\nzażółć gęślą jaźń",
+  sender_id = "vito",
+  recipient_id = "bob",
+  message_id = "msg_001"
+)
+
+decrypt_message(
+  message_id = "msg_001",
+  sender_id = "vito",
+  recipient_id = "bob"
+)
+
+sodiumExtra::sync_github(
+  root = ".",
+  user.name = "John Doe",
+  user.email = "john.doe@mail.com",
+  commit_message = "Github synchronization"
+)
 
 library(sodium)
 #library(sodiumExtra)
@@ -8,19 +48,7 @@ dir.create("public/keys", recursive = TRUE, showWarnings = FALSE)
 dir.create("private/messages", recursive = TRUE, showWarnings = FALSE)
 dir.create("private/keys", recursive = TRUE, showWarnings = FALSE)
 
-gitignore_path <- ".gitignore"
-line_to_add <- "/private/"
-if (!file.exists(gitignore_path)) {
-  file.create(gitignore_path)
-}
-lines <- readLines(gitignore_path, warn = FALSE)
 
-if (!line_to_add %in% lines) {
-  write(line_to_add, file = gitignore_path, append = TRUE)
-  message("Dodano /private/ do .gitignore")
-} else {
-  message("Wpis /private/ już istnieje w .gitignore")
-}
 
 ## Tab 1 - Key generation
 user_id <- "vito"
@@ -222,6 +250,20 @@ decrypted <- sodium::auth_decrypt(ciphertext, recipient_key, sender_pubkey, nonc
 writeBin(decrypted, output_file_path)
 
 ## Tab 6 - Github synchronization
+gitignore_path <- ".gitignore"
+line_to_add <- "/private/"
+if (!file.exists(gitignore_path)) {
+  file.create(gitignore_path)
+}
+lines <- readLines(gitignore_path, warn = FALSE)
+
+if (!line_to_add %in% lines) {
+  write(line_to_add, file = gitignore_path, append = TRUE)
+  message("Entry /private/ added to .gitignore")
+} else {
+  message("Entry /private/ already exists in .gitignore")
+}
+
 user.name <- "John Doe"
 user.email <- "john.doe@mail.com"
   

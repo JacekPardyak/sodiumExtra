@@ -1,0 +1,19 @@
+Package: sodiumExtra
+Title: Extended Tools for Sodium Encryption
+Version: 0.1.0
+Authors@R: person("Jacek", "Pardyak",
+    email = "jacek.pardyak@gmail.com",
+    role = c("aut", "cre"))
+Description: Tools for encrypting and decrypting messages and files
+    using public-key cryptography provided by the sodium package.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports:
+    sodium,
+    processx
+Suggests:
+    testthat (>= 3.0.0),
+    roxygen2
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.1
