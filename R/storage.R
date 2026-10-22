@@ -30,3 +30,34 @@
   writeBin(data, path)
   invisible(path)
 }
+
+.run_git <- function(args, fail = TRUE) {
+  
+  cat("\n-> git", paste(args, collapse = " "), "\n")
+  
+  output <- suppressWarnings(
+    system2(
+      "git",
+      args = args,
+      stdout = TRUE,
+      stderr = TRUE
+    )
+  )
+  
+  status <- attr(output, "status")
+  if (is.null(status)) status <- 0L
+  
+  if (length(output)) {
+    cat(output, sep = "\n")
+    cat("\n")
+  }
+  
+  if (status != 0L && fail) {
+    stop(
+      sprintf("Git returned an error code: %d", status),
+      call. = FALSE
+    )
+  }
+  
+  invisible(status)
+}
