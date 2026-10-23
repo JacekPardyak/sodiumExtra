@@ -164,6 +164,7 @@ sync_vault <- function(user_repo, user_token, user_name, user_email) {
     ),
     askpass
   )
+  Sys.chmod(askpass, "0700")
   
 # if (Sys.chmod(askpass, "0700") != 0L) {
 #    stop(
