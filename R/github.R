@@ -165,12 +165,12 @@ sync_vault <- function(user_repo, user_token, user_name, user_email) {
     askpass
   )
   
-  if (Sys.chmod(askpass, "0700") != 0L) {
-    stop(
-      "Failed to set permissions for the askpass file.",
-      call. = FALSE
-    )
-  }
+# if (Sys.chmod(askpass, "0700") != 0L) {
+#    stop(
+#      "Failed to set permissions for the askpass file.",
+#      call. = FALSE
+#    )
+#  }
   
   # Configure temporary authentication environment
   Sys.setenv(
