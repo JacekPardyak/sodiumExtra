@@ -201,7 +201,7 @@ sync_vault <- function(user_repo, user_token, user_name, user_email) {
     .run_git(c(
       "commit",
       "-m",
-      "Synchronize files from Google Colab"
+      shQuote("Synchronize files from Google Colab")
     ))
     
   } else if (staged_status == 0L) {
